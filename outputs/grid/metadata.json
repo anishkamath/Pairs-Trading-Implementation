@@ -1,0 +1,42 @@
+{
+  "selection_policy": "Fixed economic pair watchlist; each pair becomes eligible after 252-session pair-price coverage.",
+  "research_role": "Activity diagnostic only; it deliberately removes the daily cointegration/stability gate and is not a validated strategy.",
+  "hedge_mode": "rehedge",
+  "beta_lookback": 60,
+  "signal_model": "60 prior daily closes; signal close evaluated out of sample; next-session open execution.",
+  "position_model": "The preceding 60-session alpha, beta, and residual scale update daily; at each next open the legs are rebalanced to the new beta, and resulting turnover is counted.",
+  "exit_rules": "Exit on z-score crossing zero, +/-4 z hard stop, or non-positive updated hedge beta.",
+  "entry_z": 2.0,
+  "exit_z": 0.0,
+  "stop_z": 4.0,
+  "zstar_grid": [
+    2.0,
+    2.5,
+    3.0
+  ],
+  "zstar_walkforward": null,
+  "costs_bps_per_turnover": [
+    0.0,
+    1.0,
+    5.0,
+    10.0
+  ],
+  "kalman_filter": {
+    "model": "Two-state random walk on log-price intercept and hedge beta.",
+    "signal_timing": "One-step-ahead innovation at close t uses the state through t-1; current close updates state; posterior hedge is used at next-session open.",
+    "process_noise_alpha": 1e-07,
+    "process_noise_beta": 1e-07,
+    "measurement_variance_scale": 1.0,
+    "initialization": "OLS on first 60 aligned closes; measurement variance initialized from residual variance.",
+    "limitations": [
+      "Fixed process-noise settings are exploratory and not tuned.",
+      "Kalman uses predictive-innovation scaling, so both hedge adaptation and z-score scale differ from OLS."
+    ]
+  },
+  "pnl_normalization": "Each trade starts at one unit of gross pair notional. Summed trade P&L is un-compounded, not a portfolio return.",
+  "limitations": [
+    "Results use the already-inspected 2006-2026 sample; they are not confirmatory holdout results.",
+    "Variant-grid selection on this history is exploratory; keep a final untouched holdout before trusting any chosen setting.",
+    "Daily adjusted OHLC execution is approximate; spread, borrow, financing, and market impact are omitted."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "provider": "yfinance history() wrapper",
+  "downloaded_at_utc": "2026-10-27T21:20:05.057480+00:00",
+  "interval": "1d",
+  "auto_adjust": true,
+  "start_inclusive": "2006-01-01",
+  "end_exclusive": null,
+  "tickers": [
+    "KO",
+    "PEP",
+    "INTC",
+    "AMD",
+    "GLD",
+    "SLV"
+  ],
+  "rows": 31342,
+  "data_file": "C:\\Users\\anish\\OneDrive\\Desktop\\data\\yfinance_daily.parquet",
+  "price_note": "OHLC adjusted by yfinance for splits/dividends; action columns are retained when returned."
+}

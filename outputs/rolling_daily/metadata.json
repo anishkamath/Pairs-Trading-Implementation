@@ -1,0 +1,53 @@
+{
+  "process": "Daily rolling selection on prior 252 closes; next-session open execution with rolling 60-session daily beta model.",
+  "data_file": "C:\\Users\\anish\\OneDrive\\Desktop\\data\\yfinance_daily.parquet",
+  "source_prices": "yfinance auto_adjust=True daily OHLC",
+  "tickers": [
+    "AMD",
+    "GLD",
+    "INTC",
+    "KO",
+    "PEP",
+    "SLV"
+  ],
+  "candidate_pairs": [
+    [
+      "KO",
+      "PEP"
+    ],
+    [
+      "INTC",
+      "AMD"
+    ],
+    [
+      "GLD",
+      "SLV"
+    ]
+  ],
+  "first_source_date": "2006-01-03",
+  "last_source_date": "2026-10-27",
+  "formation_dates": 4986,
+  "selected_pair_dates": 82,
+  "selection_lookback_sessions": 252,
+  "beta_lookback_sessions": 60,
+  "min_coverage": 0.95,
+  "maxlag": 5,
+  "entry_z": 2.0,
+  "exit_z": 0.0,
+  "stop_z": 4.0,
+  "costs_bps_per_turnover": [
+    0.0,
+    1.0,
+    5.0,
+    10.0
+  ],
+  "pnl_normalization": "Each trade is sized to one unit of gross pair notional at entry. P&L and turnover are summed in those trade units without compounding or a portfolio-capital denominator; reported bps are the summed dollar P&L multiplied by 10,000.",
+  "limitations": [
+    "Daily-bar variant: entries/exits execute at next session open; holdings may span multiple sessions.",
+    "The 60-session beta fit uses adjusted daily closes, not intraday bars.",
+    "BY correction is per daily family of six pairs, not across repeated overlapping daily screens.",
+    "Pair universe was specified in advance but has not been tested on an untouched holdout.",
+    "Adjusted prices account for split/dividend adjustments supplied by yfinance; these are not executable quote prices.",
+    "No bid/ask spread, borrow, financing, market impact, or quote-size modeling."
+  ]
+}
